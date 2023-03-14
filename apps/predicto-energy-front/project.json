@@ -1,0 +1,83 @@
+{
+  "name": "predicto-energy-front",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "generators": {
+    "@schematics/angular:component": {
+      "style": "scss"
+    }
+  },
+  "sourceRoot": "apps/predicto-energy-front/src",
+  "prefix": "app",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "options": {
+        "outputPath": "dist/apps/predicto-energy-front",
+        "index": "apps/predicto-energy-front/src/index.html",
+        "main": "apps/predicto-energy-front/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/predicto-energy-front/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/predicto-energy-front/src/favicon.ico",
+          "apps/predicto-energy-front/src/assets"
+        ],
+        "styles": ["apps/predicto-energy-front/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "predicto-energy-front:build:production"
+        },
+        "development": {
+          "browserTarget": "predicto-energy-front:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "predicto-energy-front:build"
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/predicto-energy-front"],
+      "options": {
+        "jestConfig": "apps/predicto-energy-front/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

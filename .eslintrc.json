@@ -1,0 +1,84 @@
+{
+  "root": true,
+  "ignorePatterns": ["**/*", "*.json"],
+  "plugins": ["@nrwl/nx"],
+  "extends": ["plugin:prettier/recommended"],
+  "overrides": [
+    {
+      "files": ["*.ts", "*.js"],
+      "rules": {
+        "@nrwl/nx/enforce-module-boundaries": [
+          "error",
+          {
+            "enforceBuildableLibDependency": true,
+            "allow": [],
+            "depConstraints": [
+              {
+                "sourceTag": "*",
+                "onlyDependOnLibsWithTags": ["*"]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": ["*.ts", "*.tsx"],
+      "extends": ["plugin:@nrwl/nx/typescript"],
+      "rules": {}
+    },
+    {
+      "files": ["*.ts"],
+      "rules": {
+        "@typescript-eslint/explicit-member-accessibility": "error",
+        "@typescript-eslint/explicit-function-return-type": "error"
+      }
+    },
+    {
+      "files": ["*module.ts"],
+      "rules": {
+        "@typescript-eslint/explicit-function-return-type": "off"
+      }
+    },
+    {
+      "files": ["*.js", "*.jsx"],
+      "extends": ["plugin:@nrwl/nx/javascript"],
+      "rules": {}
+    },
+    {
+      "files": ["*.html"],
+      "rules": {},
+      "plugins": ["html"]
+    },
+    {
+      "files": ["*.spec.ts"],
+      "rules": {
+        "max-lines-per-function": ["off"],
+        "@typescript-eslint/explicit-member-accessibility": "off",
+        "@typescript-eslint/explicit-function-return-type": "off"
+      }
+    },
+    {
+      "files": ["*.spec.ts"],
+      "extends": ["plugin:jest/recommended"],
+      "plugins": ["jest"],
+      "rules": {
+        "jest/no-jasmine-globals": "warn",
+        "jest/expect-expect": "warn",
+        "jest/no-conditional-expect": "warn",
+        "jest/no-export": "warn",
+        "jest/no-identical-title": "warn",
+        "jest/no-done-callback": "warn",
+        "jest/valid-expect": "warn",
+        "jest/no-standalone-expect": "warn",
+        "jest/valid-expect-in-promise": "warn",
+        "jest/no-deprecated-functions": "warn"
+      },
+      "settings": {
+        "jest": {
+          "version": 28
+        }
+      }
+    }
+  ]
+}
